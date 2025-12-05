@@ -3,9 +3,9 @@
 DiamondTrap::~DiamondTrap()
 {std::cout << "Destructor called on DiamondTrap :" << _name << std::endl;}
 
-DiamondTrap::DiamondTrap() : ClapTrap("Default")
+DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name")
 {
-    ClapTrap::_name = _name + "_clap_name"; 
+    _name = "Default"; 
     _hitPoints = 100;
     _attackDamage = 30;
     _energyPoints = 50;
@@ -38,6 +38,11 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
     return *this;
 }
 
+
+void DiamondTrap::whoAmI()
+{
+    std::cout << "I am " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
+}
 
 
 

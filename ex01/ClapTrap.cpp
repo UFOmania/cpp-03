@@ -38,7 +38,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
     return *this;
 }
 
-void ClapTrap::attack(std::string target)
+void ClapTrap::attack(const std::string &target)
 {
     if (_hitPoints && _energyPoints)
     {
@@ -61,8 +61,8 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     if (_hitPoints && _energyPoints)
     {
-        if (__INT32_MAX__ < _hitPoints + amount)
-            _hitPoints = __INT32_MAX__;
+        if (amount > 100 || _hitPoints + amount > 100)
+            _hitPoints = 100;
         else
             _hitPoints += amount;
 
