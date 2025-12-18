@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/18 17:59:28 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 17:59:28 by massrayb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScavTrap.hpp"
 
 ScavTrap::~ScavTrap()
@@ -28,11 +40,13 @@ ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other._name)
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
+    std::cout << "Copy assignment operator called on ScavTrap :" << _name << std::endl;
+    if (this == &other)
+        return;
     _name = other._name;
     _hitPoints = other._hitPoints; 
     _attackDamage = other._attackDamage; 
     _energyPoints = other._energyPoints;
-    std::cout << "Copy assignment operator called on ScavTrap :" << _name << std::endl;
     return *this;
 }
 

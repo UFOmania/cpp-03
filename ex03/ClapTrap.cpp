@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/18 17:58:59 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 17:58:59 by massrayb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ClapTrap.hpp"
 
 ClapTrap::~ClapTrap()
@@ -30,11 +42,13 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
+    std::cout << "Copy assignment operator called on ClapTrap :" << _name << std::endl;
+    if (this == &other)
+        return;
     _name = other._name;
     _hitPoints = other._hitPoints; 
     _attackDamage = other._attackDamage; 
     _energyPoints = other._energyPoints;
-    std::cout << "Copy assignment operator called on ClapTrap :" << _name << std::endl;
     return *this;
 }
 
