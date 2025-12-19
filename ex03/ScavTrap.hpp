@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 17:59:33 by massrayb          #+#    #+#             */
-/*   Updated: 2025/12/18 17:59:33 by massrayb         ###   ########.fr       */
+/*   Created: 2025/12/18 17:58:56 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 17:58:56 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class ScavTrap: virtual public ClapTrap
 {
     public:
-        ~ScavTrap();
+        virtual ~ScavTrap();
         ScavTrap();
         ScavTrap(std::string name);
         ScavTrap(const ScavTrap &other);

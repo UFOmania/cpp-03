@@ -5,15 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 17:58:59 by massrayb          #+#    #+#             */
-/*   Updated: 2025/12/18 17:58:59 by massrayb         ###   ########.fr       */
+/*   Created: 2025/12/18 13:18:34 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 13:18:34 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::~ClapTrap()
-{std::cout << "Destructor called on ClapTrap :" << _name << std::endl;}
+{
+    std::cout << "Destructor called on ClapTrap " << _name << std::endl;
+}
 
 ClapTrap::ClapTrap()
 {
@@ -36,15 +38,15 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
+    std::cout << "Copy Constructor called on ClapTrap :" << other._name << std::endl;
     *this = other;
-    std::cout << "Copy Constructor called on ClapTrap :" << _name << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
-    std::cout << "Copy assignment operator called on ClapTrap :" << _name << std::endl;
+    std::cout << "Copy assignment operator called on ClapTrap :" << other._name << std::endl;
     if (this == &other)
-        return;
+        return *this;
     _name = other._name;
     _hitPoints = other._hitPoints; 
     _attackDamage = other._attackDamage; 
@@ -54,34 +56,57 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 
 void ClapTrap::attack(const std::string &target)
 {
-    if (_hitPoints && _energyPoints)
-    {
-        std::cout << "ClapTrap "<< _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
-        _energyPoints--;
-    }
+    if (!_energyPoints)
+	{
+        std::cout << "ClapTrap " << _name << " can't attack because have no Energy Points\n";
+		return;
+	}
+    if (!_hitPoints)
+	{
+        std::cout << "ClapTrap " << _name << " can't attack because is already dead\n";
+		return;
+	}
+
+	std::cout << "ClapTrap "<< _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
+	_energyPoints--;
+
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (_hitPoints)
-    {
-        _hitPoints -= amount;
-        if (_hitPoints < 0)
-            _hitPoints = 0;
-    }
+    if (!_hitPoints)
+	{
+		std::cout << "ClapTrap " << _name << " can't take damage because is already dead\n";
+		return;
+	}
+    
+	if (amount >= (unsigned int)_hitPoints)
+		_hitPoints = 0;
+	else
+		_hitPoints -= amount;
+	std::cout << "ClapTrap "<< _name << " took " << amount << " of damage, how have " << _hitPoints << " of hp"<< std::endl;
+    
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (_hitPoints && _energyPoints)
-    {
-        if (amount > 100 || _hitPoints + amount > 100)
-            _hitPoints = 100;
-        else
-            _hitPoints += amount;
+    if (!_energyPoints)
+	{
+		std::cout << "ClapTrap " << _name << " can't be repaired because have no Energy Points\n";
+		return ;
+	}
+    if (!_hitPoints)
+	{
+		std::cout << "ClapTrap " << _name << " can't be repaired because is already dead\n";
+		return ;
+	}
 
-        _energyPoints--;
-    }
+	if ((unsigned int)_hitPoints > INT_MAX - amount)
+		_hitPoints = INT_MAX;
+	else
+		_hitPoints += amount;
+	_energyPoints--;
+	std::cout << "ClapTrap "<< _name << " took " << amount << " of repared, how have " << _hitPoints << " of hp"<< std::endl;
 }
 
 

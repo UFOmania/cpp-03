@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 17:55:10 by massrayb          #+#    #+#             */
-/*   Updated: 2025/12/18 17:55:10 by massrayb         ###   ########.fr       */
+/*   Created: 2025/12/18 13:18:26 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 13:18:26 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
 #include <iostream>
+#include <climits>
 
 class ClapTrap
 {
@@ -24,7 +25,7 @@ class ClapTrap
         int         _attackDamage;
 
     public:
-        ~ClapTrap();
+        virtual ~ClapTrap();
         ClapTrap();
         ClapTrap(std::string name);
         ClapTrap(const ClapTrap &other);

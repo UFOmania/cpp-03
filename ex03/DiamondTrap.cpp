@@ -18,37 +18,34 @@ DiamondTrap::~DiamondTrap()
 DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name")
 {
     _name = "Default"; 
-    _hitPoints = 100;
-    _attackDamage = 30;
-    _energyPoints = 50;
+    _hitPoints = FragTrap::_hitPoints;
+    _attackDamage = FragTrap::_attackDamage;
+    _energyPoints = ScavTrap::_energyPoints;
     std::cout << "Default Constructor called on DiamondTrap :Default" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name")
 {
     _name = name;
-    _hitPoints = 100;
-    _attackDamage = 30;
-    _energyPoints = 50;
+    _hitPoints = FragTrap::_hitPoints;
+    _attackDamage = FragTrap::_attackDamage;
+    _energyPoints = ScavTrap::_energyPoints;
     std::cout << "Paramerized Constructor called on DiamondTrap :" << name << std::endl;
 }
 
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other) :ClapTrap(other._name) , FragTrap(other._name), ScavTrap(other._name) 
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other),FragTrap(other), ScavTrap(other) 
 {
-    *this = other;
-    std::cout << "Copy Constructor called on DiamondTrap :" << _name << std::endl;
+    std::cout << "Copy Constructor called on DiamondTrap :" << other._name << std::endl;
+	_name = other._name;
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 {
-    std::cout << "Copy assignment operator called on DiamondTrap :" << _name << std::endl;
+    std::cout << "Copy assignment operator called on DiamondTrap :" << other._name << std::endl;
     if (this == &other)
-        return;
+        return *this;
     _name = other._name;
-    _hitPoints = other._hitPoints; 
-    _attackDamage = other._attackDamage; 
-    _energyPoints = other._energyPoints;
     return *this;
 }
 

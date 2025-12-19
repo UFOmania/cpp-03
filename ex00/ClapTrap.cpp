@@ -38,15 +38,15 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-    std::cout << "Copy Constructor called on ClapTrap :" << _name << std::endl;
+    std::cout << "Copy Constructor called on ClapTrap :" << other._name << std::endl;
     *this = other;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
-    std::cout << "Copy assignment operator called on ClapTrap :" << _name << std::endl;
+    std::cout << "Copy assignment operator called on ClapTrap :" << other._name << std::endl;
     if (this == &other)
-        return;
+        return *this;
     _name = other._name;
     _hitPoints = other._hitPoints; 
     _attackDamage = other._attackDamage; 
@@ -57,46 +57,56 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 void ClapTrap::attack(const std::string &target)
 {
     if (!_energyPoints)
+	{
         std::cout << "ClapTrap " << _name << " can't attack because have no Energy Points\n";
+		return;
+	}
     if (!_hitPoints)
+	{
         std::cout << "ClapTrap " << _name << " can't attack because is already dead\n";
-    if (_hitPoints && _energyPoints)
-    {
-        std::cout << "ClapTrap "<< _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
-        _energyPoints--;
-    }
+		return;
+	}
+
+	std::cout << "ClapTrap "<< _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
+	_energyPoints--;
+
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (!_energyPoints)
-        std::cout << "ClapTrap " << _name << " can't take damage because have no Energy Points\n";
     if (!_hitPoints)
-        std::cout << "ClapTrap " << _name << " can't take damage because is already dead\n";
-    if (_hitPoints && _energyPoints)
-    {
-        int hp = _hitPoints - amount;
-        if (hp <= 0 || hp > _hitPoints)
-            _hitPoints = 0;
-        std::cout << "ClapTrap "<< _name << " took " << amount << " of damage, how have " << _hitPoints << " of hp"<< std::endl;
-    }
+	{
+		std::cout << "ClapTrap " << _name << " can't take damage because is already dead\n";
+		return;
+	}
+    
+	if (amount >= (unsigned int)_hitPoints)
+		_hitPoints = 0;
+	else
+		_hitPoints -= amount;
+	std::cout << "ClapTrap "<< _name << " took " << amount << " of damage, how have " << _hitPoints << " of hp"<< std::endl;
+    
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
     if (!_energyPoints)
-        std::cout << "ClapTrap " << _name << " can't be repaired because have no Energy Points\n";
+	{
+		std::cout << "ClapTrap " << _name << " can't be repaired because have no Energy Points\n";
+		return ;
+	}
     if (!_hitPoints)
-        std::cout << "ClapTrap " << _name << " can't be repaired because is already dead\n";
-    if (_hitPoints && _energyPoints)
-    {
-        if (amount >= 100 || _hitPoints + amount >= 100)
-            _hitPoints = 100;
-        else
-            _hitPoints += amount;
-        _energyPoints--;
-        std::cout << "ClapTrap "<< _name << " took " << amount << " of repared, how have " << _hitPoints << " of hp"<< std::endl;
-    }
+	{
+		std::cout << "ClapTrap " << _name << " can't be repaired because is already dead\n";
+		return ;
+	}
+
+	if ((unsigned int)_hitPoints > INT_MAX - amount)
+		_hitPoints = INT_MAX;
+	else
+		_hitPoints += amount;
+	_energyPoints--;
+	std::cout << "ClapTrap "<< _name << " took " << amount << " of repared, how have " << _hitPoints << " of hp"<< std::endl;
 }
 
 

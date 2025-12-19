@@ -14,8 +14,10 @@
 
 int main()
 {
-    DiamondTrap cp;
+    DiamondTrap cp("ali");
+	std::cout <<std::endl;
+	DiamondTrap a(cp);
+	std::cout <<std::endl ;
+	a.whoAmI();
 
-    cp.attack("hello");
-    cp.whoAmI();
 }

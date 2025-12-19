@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 17:59:12 by massrayb          #+#    #+#             */
-/*   Updated: 2025/12/18 17:59:12 by massrayb         ###   ########.fr       */
+/*   Created: 2025/12/18 17:55:53 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 17:55:53 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,24 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 }
 
 
-FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other._name)
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 {
-    *this = other;
-    std::cout << "Copy Constructor called on FragTrap :" << _name << std::endl;
+    std::cout << "Copy Constructor called on FragTrap :" << other._name << std::endl;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &other)
 {
-    std::cout << "Copy assignment operator called on FragTrap :" << _name << std::endl;
+    std::cout << "Copy assignment operator called on FragTrap :" << other._name << std::endl;
     if (this == &other)
-        return;
-    _name = other._name;
-    _hitPoints = other._hitPoints; 
-    _attackDamage = other._attackDamage; 
-    _energyPoints = other._energyPoints;
+        return *this;
+    ClapTrap::operator=(other);
     return *this;
 }
 
 
 void FragTrap::highFivesGuys()
 {
-    std::cout << "FragTrap " << _name << " request's a high-fives" << std::endl;
+    std::cout << "FragTrap " << _name << " requests a high-fives" << std::endl;
 }
 
 

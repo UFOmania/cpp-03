@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: massrayb <massrayb@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/18 17:59:24 by massrayb          #+#    #+#             */
-/*   Updated: 2025/12/18 17:59:24 by massrayb         ###   ########.fr       */
+/*   Created: 2025/12/18 17:55:56 by massrayb          #+#    #+#             */
+/*   Updated: 2025/12/18 17:55:56 by massrayb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 class FragTrap: virtual public ClapTrap
 {
     public:
-        ~FragTrap();
+        virtual ~FragTrap();
         FragTrap();
         FragTrap(std::string name);
         FragTrap(const FragTrap &other);
         FragTrap &operator=(const FragTrap &other);
         void highFivesGuys(void);
+
 };
 
 
